@@ -1,0 +1,108 @@
+<div class="content-header">
+  <h3>Produto</h3>
+</div>
+
+
+<div class="" style="width:300px;float:left;">
+  <img src=" <?php $this->getImage(); ?>">
+  <h1 class="text-center"><?php echo $this->getName(); ?></h1>
+</div>
+<h2>
+  A forma de frete escolhida pelo usuário foi:
+<?php
+
+ $escrita = $this->getMethod();
+ $escrita = explode('_',$escrita);
+ if($escrita[0] == "melhorcotacao" ){
+   echo $escrita[3];
+
+ }else{
+   echo "Um frete não melhor envio.";
+ }
+
+
+$cot = json_decode($this->getCotacao());
+?>
+</h2>
+<div class="" style="width:500px;float:left;">
+
+
+
+
+<style media="screen">
+ td {
+   border-bottom-width: 1px;
+   border-bottom-style: solid;
+   padding-left: 20px;
+   padding-right: 20px;
+   padding-top: 20px;
+   padding-bottom: 10px;
+ }
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <td><h5>Transportadora</h5></td>
+      <td><h5>Serviço</h5></td>
+    </tr>
+  </thead>
+  <tbody>
+
+  <?php foreach ($cot as $ship ): ?>
+    <tr>
+      <td>
+      <h3>  <?php echo $ship->name;?></h3>
+      </td>
+
+      <td>
+        <table>
+          <thead>
+            <tr>
+            </tr>
+          </thead>
+          <?php foreach ($ship->services as $service): ?>
+            <tr>
+              <td style="width:250px;">
+                <?php echo $service->name ?>
+              </td>
+              <td style="width:200px;">
+                <?php echo $service->status == 1? "Disponível":"Indisponível"; ?>
+              </td>
+              <td style="width:200px;">
+                <?php echo $service->delivery_time; ?>
+              </td>
+              <td>
+                  R$ <?php  echo number_format($service->price,2); ?>
+              </td>
+              <td>
+                <?php if ($service->status == 1): ?>
+                  <form action="<?php echo $this->getUrl("admin_envio/adminhtml_index/buyship") ;?>" method="post">
+                    <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+                    <input type="hidden" name="service" value="<?php echo $service->id ;?>">
+                    <input type="hidden" name="compra_id" value="<?php echo $this->getIdCustomer();?>">
+                  <button type="submit" name="button">
+                  </form>
+
+                Enviar com transportadora</button>
+                <?php else: ?>
+                  Indisponível
+                <?php endif; ?>
+
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </table>
+
+      </td>
+
+  </tr>
+  <?php endforeach; ?>
+
+  </tbody>
+</table>
+
+
+
+
+</div>

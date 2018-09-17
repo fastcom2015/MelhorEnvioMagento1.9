@@ -1,0 +1,136 @@
+<div class="content-header">
+  <h3>Dados do envio do frete</h3>
+</div>
+
+
+<div class="" style="width:300px;float:left;">
+  <img src=" <?php $this->getImage(); ?>">
+  <h1 class="text-center"><?php echo $this->getName(); ?></h1>
+</div>
+<pre>
+    <?php $cotacao = json_decode($this->getCotacao());  ?>
+</pre>
+
+
+
+<div class="" style="width:500px;float:left;">
+
+
+
+
+<style media="screen">
+ td {
+   border-width: 1px;
+   border-style: solid;
+   padding-left: 20px;
+   padding-right: 20px;
+   padding-top: 20px;
+   padding-bottom: 10px;
+   text-align: center;
+ }
+
+ .price{
+   color:green;
+ }
+
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <td><h5>Id da compra</h5></td>
+      <td><h5>Status</h5></td>
+      <td><h5>Rastreio</h5></td>
+      <td><h5>Preço</h5></td>
+      <td><h5>Atualizado</h5></td>
+    </tr>
+  </thead>
+  <tbody>
+<?php foreach ($cotacao as $cot): ?>
+  <tr>
+    <td>
+    <h3>  <?php echo $cot->ref;?></h3>
+    </td>
+
+    <td>
+    <h3>  <?php
+
+    if($cot->state != null){
+    switch ($cot->state) {
+      case 1:
+        echo "Pendente";
+        break;
+      case 2:
+        echo "Liberado";
+        break;
+      case 3:
+        echo "Postado";
+        break;
+      case 4:
+        echo "Entregue";
+        break;
+      case 0:
+        echo "Cancelado";
+        break;
+      case -1:
+        echo "Não entregue";
+        break;
+      default:
+        echo "Indisponível";
+        break;
+    }
+  }else{
+    echo "Indisponível";
+  }
+
+
+
+    ;?></h3>
+    </td>
+
+    <td>
+      <?php if ($cot->tracking == NULL && $cot->price == 0): ?>
+        Código de rastreio ainda indisponível, confirme sua compra.
+        <?php else: ?>
+            <?php if ($cot->price > 0): ?>
+                Código de rastreio ainda indisponível, <a href="http://www.melhorenvio.com.br/vendedor/meus_envios/?a=1.php?>" target="_blank">imprima sua etiqueta.</a>
+              <?php else: ?>
+              <h3> <a href=" <?php echo $cot->tracking;?>"> Rastreio</a></h3>
+            <?php endif; ?>
+      <?php endif; ?>
+    </td>
+
+    <td>
+    <h3 class="price"> <strong> R$<?php
+
+    if($cot->price != null)
+    {
+    echo $cot->price;
+  }else{
+    echo " - ";
+  }
+
+    ?> </strong></h3>
+
+    </td>
+
+    <td>
+    <h3>  <?php echo date('d/m/Y h:i',$cot->updated_at);?></h3>
+    </td>
+
+</tr>
+
+
+<?php endforeach; ?>
+
+
+  </tbody>
+</table>
+
+
+<?php if ($cotacao[0]->price == null && $cotacao[0]->state == null): ?>
+  <br>
+  <h4>Esperando confirmação de compra... Confirme a sua compra <a href="<?php echo $this->getCarrinho();?>" target="_blank">aqui</a>.</h4>
+<?php endif; ?>
+
+</div>

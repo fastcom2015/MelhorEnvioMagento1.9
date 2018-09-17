@@ -1,0 +1,23 @@
+<div class="content-header">
+    <?php echo $this->getHeaderHtml() ?>
+    <p class="form-buttons"><?php echo $this->getButtonsHtml('header') ?></p>
+</div>
+
+<?php if ($message = $this->getMessage()) : ?>
+    <div class="notification-global"><?php echo $message ?></div>
+<?php endif; ?>
+
+<table>
+  <thead>
+    <tr>
+      <td>Referencia</td>
+      <td>Status</td>
+      <td>Rastreio</td>
+      <td>Preço</td>
+      <td>Última atualização</td>
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+</table>

@@ -1,0 +1,64 @@
+
+
+<div class="content-header">
+    <?php echo $this->getHeaderHtml() ?>
+    <p class="form-buttons"><?php echo $this->getButtonsHtml('header') ?></p>
+</div>
+
+<?php
+    $data = $this->getSubsData();
+
+    if (isset($data)){
+        echo "Alterações nesse formulário resultarão na reinicialização do plugin do zero. <br><br><br>";
+echo '
+        <script>
+          
+               alert("Alterações nesse formulário resultarão na reinicialização do plugin do zero..  Deseja continuar?");
+           
+          
+        </script>
+    ';
+    }
+?>
+
+
+
+<form id="form" class="" action="<?php echo $this->getUrl("admin_envio/adminhtml_index/salva") ?>" method="post">
+  <span class="form_row">
+    <label for="">E-mail:</label><br>
+    <input type="text" name="email" value="<?php if(isset($data)){ echo $data->email ; } ?>" class="input-text" required=""> <br>
+  </span>
+
+
+  <span class="form_row">
+    <label for="">Nome:</label><br>
+    <input type="text" name="firstname" value="<?php if(isset($data)){ echo $data->firstname ; } ?>" class="input-text"> <br>
+  </span>
+
+    <span class="form_row">
+  <label for="">CPF:</label><br>
+  <input type="text" name="cpf" value="<?php if(isset($data)){ echo $data->cpf ; } ?>" class="input-text"><br>
+</span>
+
+<span class="form_row">
+  <label for="">CNPJ:</label><br>
+  <input type="text" name="CNPJ" value="<?php if(isset($data)){ echo $data->cnpj ; } ?>" class="input-text"><br>
+</span>
+
+<span class="form_row">
+  <label for="">IE:</label><br>
+  <input type="text" name="IE" value="<?php if(isset($data)){ echo $data->ie ; } ?>" class="input-text"><br>
+</span>
+
+
+
+
+<br><br>
+<button type="submit" name="button">Salvar</button>
+<br>
+
+<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+
+
+
+</form>

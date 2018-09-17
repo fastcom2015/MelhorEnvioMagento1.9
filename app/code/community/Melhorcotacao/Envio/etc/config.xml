@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <modules>
+        <Melhorcotacao_Envio>
+
+            <version> 1.0.0</version>
+            <depends>
+               <Mage_Shipping/>
+           </depends>
+        </Melhorcotacao_Envio>
+    </modules>
+
+    <frontend>
+        <routers>
+            <envio>
+                    <use>standard</use>
+                    <args>
+                        <module>Melhorcotacao_Envio</module>
+                        <frontName>envio</frontName>
+                    </args>
+            </envio>
+        </routers>
+    </frontend>
+
+    <admin>
+        <routers>
+            <envio>
+                <use>admin</use>
+                <args>
+                    <module>Melhorcotacao_Envio</module>
+                    <frontName>admin_envio</frontName>
+                </args>
+            </envio>
+        </routers>
+    </admin>
+    <global>
+        <blocks>
+          <melhorcotacao_envio_adminhtml>
+            <class>Melhorcotacao_Envio_Block_Adminhtml</class>
+          </melhorcotacao_envio_adminhtml>
+        </blocks>
+        <helpers>
+            <envio>
+                <class>Melhorcotacao_Envio_Helper</class>
+            </envio>
+        </helpers>
+    </global>
+    <adminhtml>
+        <menu>
+            <envio module="envio">
+                <title>Melhor Envio</title>
+                <sort_order>100</sort_order>
+                <children>
+                    <envio module="envio">
+                        <title>Cadastro</title>
+                        <sort_order>1</sort_order>
+                        <action>admin_envio/adminhtml_index/index</action>
+                    </envio>
+                    <envio2 module="envio">
+                        <title>Preferencias</title>
+                        <sort_order>2</sort_order>
+                        <action>admin_envio/adminhtml_index/preferencias</action>
+                    </envio2>
+                    <envio3 module="envio">
+                        <title>Pedidos</title>
+                        <sort_order>0</sort_order>
+                        <action>admin_envio/adminhtml_index/relatorio</action>
+                    </envio3>
+
+                </children>
+            </envio>
+        </menu>
+    </adminhtml>
+
+    <default>
+      <carriers>
+           <melhorcotacao_envio>
+               <active>1</active>
+               <model>melhorcotacao_envio_model_carrier</model>
+               <title>Melhor Envio</title>
+               <sort_order>10</sort_order>
+               <sallowspecific>0</sallowspecific>
+               <showmethod>1</showmethod>
+               <express_max_weight>1000</express_max_weight>
+           </melhorcotacao_envio>
+
+       </carriers>
+    </default>
+</config>

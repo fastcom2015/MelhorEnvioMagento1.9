@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <melhorcotacao_envio translate="title">
+                                        <title>Envio</title>
+                                    </melhorcotacao_envio>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+
+
+</config>

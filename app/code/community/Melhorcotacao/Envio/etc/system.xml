@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <tabs>
+    <melhorcotacao_envio translate="label" module="envio">
+      <label> Envios </label>
+      <sort_order>1</sort_order>
+    </melhorcotacao_envio>
+  </tabs>
+</config>
