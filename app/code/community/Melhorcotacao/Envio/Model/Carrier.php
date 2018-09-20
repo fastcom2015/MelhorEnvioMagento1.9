@@ -98,6 +98,11 @@ implements Mage_Shipping_Model_Carrier_Interface
       $height        = $product->getData("altura");
       $width         = $product->getData("largura");
       $length        = $product->getData("comprimento");
+      
+      $weight        = $product->getData("weight");
+      $height        = 2;
+      $width         = 11;
+      $length        = 16;
 
 
     //  $request->package->width  = $request->package->width + ($width  * $pid->getQty());
